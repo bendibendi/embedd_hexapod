@@ -1,0 +1,226 @@
+  <!--pages/work/work.wxml-->
+
+<view class="page">
+  <view class="video">
+    <!--info / video -->
+    <view>
+      <view class="video" wx:if="{{condition}}">
+        <image src='{{base64ImgUrl}}'> </image>
+      </view>
+      <view class="video" wx:if="{{!condition}}">
+        <image src='{{irImage}}'> </image>
+      </view>
+      <view>
+        <button class="{{imageIndex==1?'switchImage':'switchImage2'}}" bindtap="switchImage"></button>
+      </view>
+    </view>
+  </view>
+
+  <view class="info">
+    <view class="textbox">
+      <text class="infotext" style="padding:20rpx;font-size:35rpx;flex-grow:2">GPS  </text> 
+      <text class="infotext" style="color:#629c20;font-size:35rpx;flex-grow:1">{{latitude}}</text> 
+      <text class="infotext" style="color:#629c20;font-size:35rpx;flex-grow:1">{{longitude}}</text> 
+    </view>
+    <view class="textbox">
+      <text class="infotext" style="padding:20rpx;font-size:35rpx;flex-grow:2">状态 </text> 
+      <text class="infotext" style="color:#58a7db;font-size:35rpx;flex-grow:1">{{state}}</text> 
+    </view>
+  </view>
+
+  <view class="switch">
+    <view  class="{{switchBoxNum==1?'switch-box':''}}" bindtap="click_box1">移动控制</view>
+    <view  class="{{switchBoxNum==2?'switch-box':''}}" bindtap="click_box2">形态控制</view>
+    <view  class="{{switchBoxNum==3?'switch-box':''}}" bindtap="click_box3">导航云台</view>
+  </view>
+  
+  
+  <view class="{{switchBoxNum == 1 ? 'control':'none'}}">
+
+
+    <!--  -->
+
+    <view class="control-top">
+      <view class="control-top-silders">
+       <view class="control-right-slider-box"> 
+        <slider class="slider-light1" name="upLightSlider" value="{{speedValue}}" bindchange="changeSpeedValue" bindchanging="changingSpeedValue" min='{{speedValueMin}}' max='{{speedValueMax}}'/>
+        <text class="control-top-slider-box-text">速度: {{speedValue}} 档</text>
+        <slider class="slider-light2" name="upLightSlider" value="{{stepValue}}" bindchange="changeStepValue" bindchanging="changingStepValue" min='{{stepValueMin}}' max='{{stepValueMax}}'/>
+        <text class="control-top-slider-box-text">步长: {{stepValue}} mm</text>
+        </view>
+      </view>
+      <view class="control-top-buttons">
+        <button class="{{powerValue==false?'control-top-button':'control-top-button_active'}}" bindtap="powerBtn" data-topic="wechatCommand" data-command="power" data-value="{{powerValue}}">{{powerText}}</button>
+        <button class="control-top-button2" bindtap="publishData" data-topic="wechatCommand" data-command="stop" data-value="1">停止</button>
+      </view>
+    </view>
+
+    <view class="control-bottom">
+      <view class="control-bottom-left-yaogan">
+        <view class="control-bottom-left-yaogan-back">
+          <image  style="width: 220rpx; height: 200rpx;" class="pic_background" src="../../1.png"></image> 
+        </view>
+        <view class="control-bottom-left-yaogan-front">
+          <image style="position:absolute ;width: 120rpx; height: 120rpx;left:{{leftLooksLeft}}rpx;top:{{topLooksLeft}}rpx;" bindtouchend='ImageReturnLeft' bindtouchmove='ImageTouchMoveLeft' class="pic_tou" src="../../2.png " bindtap="ImageTouchLeft"></image> 
+        </view>
+      </view>
+
+      <view class="control-bottom-right-yaogan">
+        <view class="control-bottom-right-yaogan-back">
+          <image  style="width: 220rpx; height: 200rpx;" class="pic_background" src="../../1.png"></image> 
+        </view>
+        <view class="control-bottom-right-yaogan-front">
+          <image style="position:absolute ;width: 120rpx; height: 120rpx;left:{{leftLooks}}rpx;top:{{topLooks}}rpx;" bindtouchend='ImageReturn' bindtouchmove='ImageTouchMove' class="pic_tou" src="../../2.png " bindtap="ImageTouch"></image> 
+        </view>
+      </view>
+    </view>
+
+    <!--control - button - left -->
+     <!-- <view class="control-left">    
+      <view class="control-left-buttons">
+        <button class="control-left-button" type="primary" bindtap="publishData" data-topic="wechatCommand" data-command="climb" data-value="true">爬台阶</button>
+        <button class="control-left-button" type="primary" bindtap="publishData" data-topic="wechatCommand" data-command="balance" data-value="true">自平衡</button>
+      
+        <button class="control-left-button" type="primary" bindtap="publishData" data-topic="wechatCommand" data-command="stop" data-value="true">停止</button>     
+      </view>
+
+    </view> 
+
+    <view class="control-right">
+      <view class="control-right-buttons">      
+        <button class="control-right-button" type="primary" bindtap="publishData" data-topic="wechatCommand" data-command="turnLeft" data-value="{{sliderValue}}">左转</button>
+        <button class="control-right-button" type="primary" bindtap="publishData" data-topic="wechatCommand" data-command="turnRight" data-value="{{sliderValue}}">右转</button>
+      </view>
+
+      <view class="control-right-huagui">
+        <view class="control-right-slider-box">
+          <slider bindchange="changeSliderValue" value="{{sliderValue}}" show-value/>
+          <text class="control-right-slider-box-text">转弯半径</text>
+        </view>
+      </view>
+ 
+      <view class="control-right-yaogan" id="yaogan">
+        <view class="control-right-yaogan-back">
+          <image  style="width: 220rpx; height: 200rpx;" class="pic_background" src="../../1.png"></image> 
+        </view>
+        <view class="control-right-yaogan-front">
+          <image style="position:absolute ;width: 120rpx; height: 120rpx;left:{{leftLooks}}rpx;top:{{topLooks}}rpx;" bindtouchend='ImageReturn' bindtouchmove='ImageTouchMove' class="pic_tou" src="../../2.png " bindtap="ImageTouch"></image> 
+        </view>
+      </view>
+    </view> -->
+    <!--control - yaogan  -->
+    <!-- <view class="yaogan"> -->
+      <!-- <view class="relative" id="relative"> -->
+        <!-- 背景图片 -->
+        <!-- <image id="yaoganbg" style="width: 220rpx; height: 200rpx;" class="pic_background" src="../../1.png"></image> -->
+        <!-- 摇杆图片 -->
+        <!-- <image id="yaogantou" style="width: 120rpx; height: 120rpx;left:{{leftLooks}}rpx;top:{{topLooks}}rpx;" bindtouchend='ImageReturn' bindtouchmove='ImageTouchMove' class="pic_tou" src="../../2.png " bindtap="ImageTouch"></image> -->
+        <!-- <div class="box">
+          <text class="log-item">虚拟摇杆中心：(160,310)</text>
+          <text class="log-item">当前滑动位置：({{leftLooks}},{{topLooks}})</text>
+          <text class="log-item">摇杆偏转角度：{{angle}}°</text>
+        </div> -->
+      <!-- </view> -->
+    <!-- </view> -->
+  </view>
+
+<!--页面二  -->
+  <view class="{{switchBoxNum == 2 ? 'pose':'none'}}">
+     <view class="pose-left">    
+      <view class="control-left-buttons">  
+        <view class="pose-right-switch">
+          <view  class="{{typeBoxNum==1?'switch-box':''}}" bindtap="pose_box1">六足形态</view>
+          <view  class="{{typeBoxNum==2?'switch-box':''}}" bindtap="pose_box2">四足形态</view>
+          <view  class="{{typeBoxNum==3?'switch-box':''}}" bindtap="pose_box3">滑轮形态</view>
+        </view>
+        <button class="control-left-button" type="primary" bindtap="stableChange" data-topic="wechatCommand" data-command="sitDown" data-value="true">{{stableText}}</button>
+        <button class="control-left-button" type="primary" bindtap="eject">舵机校正</button>
+      </view>
+    </view> 
+
+    <view class="pose-right">
+
+      <view class="control-right-huagui">
+        <view class="control-right-slider-box">
+          <slider bindchange="changeSliderValue1" value="{{sliderValue1}}" max="{{sliderValue1max}}" min="{{sliderValue1min}}" show-value/>
+          <text class="control-right-slider-box-text">roll</text>
+          <slider bindchange="changeSliderValue2" value="{{sliderValue2}}" max="{{sliderValue2max}}" min="{{sliderValue2min}}" show-value/>
+          <text class="control-right-slider-box-text">yaw</text>
+          <slider bindchange="changeSliderValue3" value="{{sliderValue3}}" max="{{sliderValue3max}}" min="{{sliderValue3min}}"  show-value/>
+          <text class="control-right-slider-box-text">pitch</text>
+          <slider bindchange="changeSliderValue4" value="{{sliderValue4}}" max="{{sliderValue4max}}" min="{{sliderValue4min}}"  show-value/>
+          <text class="control-right-slider-box-text">行走高度</text>
+        </view>
+      </view> 
+    </view>
+
+    <!-- 模态框弹出层 -->
+    <view class="model" catchtouchmove='preventTouchMove' wx:if='{{showModal}}'></view>
+    <view class="modalDlg" catchtouchmove='preventTouchMove' wx:if='{{showModal}}'>
+      <view class='windowRow'>
+        <text class='userTitle'>舵机校正</text>
+        <view class='back' bindtap='back'>退出</view>
+      </view>
+      <view style="width:100%" class='wishName'>
+        <input style="width:100%"  bindinput='getDuojiNum' placeholder='请输入舵机编号(数值 1-24)' placeholder-class="holder_cls" class='wish_put' type="number" maxlength="2"></input>
+      </view>
+      
+      <view style="width:100%" class='wishName'>
+        <input style="width:100%"  bindinput='getDuojiAngleNum' placeholder='请输入校正角度(数值 1-180)' placeholder-class="holder_cls" class='wish_put' type="number" maxlength="3"></input>
+      </view>
+      <view style="width:94%" class='wishbnt' bindtap='send'>发送</view>
+    </view>
+  </view>
+
+<!--页面三  -->
+<view class="{{switchBoxNum == 3 ? 'correct':'none'}}">
+     <!-- <view class="pose-left">    
+      <view class="control-left-buttons">  
+          <slider bindchange="changeSliderValue1" value="{{sliderValue}}" show-value/>
+          <text class="control-right-slider-box-text">云台X轴</text>
+          <slider bindchange="changeSliderValue2" value="{{sliderValue}}" show-value/>
+          <text class="control-right-slider-box-text">云台Y轴</text>
+      
+      </view>
+
+    </view>  -->
+
+    <view class="pose-right">
+
+      <view class="correct-right-buttons">
+        <button class="guihua-button" bindtap="enternav">路径规划</button>
+      </view>
+      <view class="control-right-huagui">
+        <view class="correct-right-slider-box">
+          <slider bindchange="changeSliderx" value="{{sliderx}}" max="{{sliderxmax}}" min="{{sliderxmin}}" show-value/>
+          <text class="control-right-slider-box-text">云台X轴</text>
+        </view>
+        <view class="correct-right-slider-box">
+          <slider bindchange="changeSlidery" value="{{slidery}}" max="{{sliderymax}}" min="{{sliderymin}}" show-value/>
+          <text class="control-right-slider-box-text">云台Y轴</text>
+        </view>
+      </view> 
+    </view>
+  </view>
+</view>
+
+
+
+
+
+
+
+<!--choose  -->
+<!--control  -->
+<!-- <view class='btnBox'>
+  <view>
+  <button bindtap="switchPage" type='{{switchPage}}' >*</button>
+   <button bindtap="b_top_tap" type='{{b_top_state}}' >↑</button>
+    <button bindtap="change" type='{{change_showing}}' >《》</button>
+  </view>
+  <view>
+    <button bindtap="b_left_tap" type='{{b_left_state}}' >←</button>
+    <button bindtap="b_down_tap" type='{{b_down_state}}' >↓</button>
+    <button bindtap="b_right_tap" type='{{b_right_state}}' >→</button>
+  </view>
+</view> -->

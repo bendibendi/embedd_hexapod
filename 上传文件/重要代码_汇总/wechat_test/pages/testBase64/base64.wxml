@@ -1,0 +1,81 @@
+
+<view class='page'>
+  <!-- <view class='hd'>
+    <text>{{lockType==1?'图案设置' : '图案解锁'}}</text>
+    <text class='c-link' wx:if="{{lockType==1}}" bindtap='reset'>重新设置</text>
+    <text class='c-link' wx:if="{{lockType==2}}" bindtap='forget'>忘记密码</text>
+  </view> -->
+  <view class='bd'>
+    <view class='title'>请规划路线</view>
+    <canvas canvas-id="canvas" class="canvas" bindtouchend="onTouchEnd"
+      bindtouchstart="onTouchStart" bindtouchmove="onTouchMove"></canvas>
+  </view>
+  
+  <view class="component-slider">
+      <!-- 覆盖slider组件盒子 -->
+      <view class="slider-box">
+          <!-- 拖动按钮 -->
+          <view class="slider-btn" style="background: #a78e44;margin-left: {{ (value-min)*(102/(max-min))-7 }}%;">N
+      </view><!-- 未选中区线 -->
+          <view class="slider-line"></view>
+          <!-- 选中区线 -->
+          <view class="slider-line-active" style="background: #c89b40;width: {{ (value-min)*(102/(max-min))-7 }}%;"></view>
+          <!-- 显示数字 -->
+          <view class="slider-number">
+              <!-- 最小限制大于等于0 -->
+              <block  wx:if="{{min>=0}}" >
+                  <block wx:for="{{max+1}}" wx:key="index" >
+                      <text wx:if="{{item%2==1}}" class="{{value==item?'active':''}}" style="left:{{ (item-min)*(100/(max-min))-2 }}%" >{{item}}</text>
+                  </block>
+              </block>
+          </view>
+      </view>
+      <!-- slider组件 -->
+      <slider block-size="28" bindchange="sliderchange" bindchanging="sliderchanging" min="{{min}}" max="{{max}}" value="{{value}}"  step="2"/>
+  </view>
+
+
+  
+  <view class="component-slider">
+      <!-- 覆盖slider组件盒子 -->
+      <view class="slider-box">
+          <!-- 拖动按钮 -->
+          <view class="slider-btn" style="background: #2e4e7e ;margin-left: {{ (value1-min1)*(102/(max1-min1))-7 }}%;">cm
+      </view><!-- 未选中区线 -->
+          <view class="slider-line"></view>
+          <!-- 选中区线 -->
+          <view class="slider-line-active" style="background: #a1afc9  ;width: {{ (value1-min1)*(102/(max1-min1))-7 }}%;"></view>
+          <!-- 显示数字 -->
+          <view class="slider-number1">
+              <!-- 最小限制大于等于0 -->
+              <block  wx:if="{{min1>=0}}" >
+                  <block wx:for="{{max1+1}}" wx:key="index" >
+                      <text wx:if="{{item%50==0&&item!=0}}" class="{{value1==item?'active':''}}" style="left:{{ (item-min1)*(100/(max1-min1))-2 }}%" >{{item}}</text>
+                  </block>
+              </block>
+          </view>
+      </view>
+      <!-- slider组件 -->
+      <slider block-size="28" bindchange="sliderchange1" bindchanging="sliderchanging1" min="{{min1}}" max="{{max1}}" value="{{value1}}"  step="10"/>
+  </view>
+
+
+
+
+
+  <!-- <divider> -->
+   <view class='ft' style="height:{{ftHeight}}px">
+      <view class="box">
+        <view class="textbox">
+          <text class="infotext" style="padding:20rpx;font-size:35rpx;flex-grow:2">比例尺为：</text> 
+          <text class="infotext" style="color:#5B96F6;font-size:60rpx;flex-grow:1">{{value1}}</text> 
+          <text class="infotext" style="font-size:35rpx;flex-grow:1"> 厘米</text>
+        </view>
+        <view class="buttonbox">
+          <button style="background-color:#75879a;color:white;margin-top:70rpx;margin:10rpx;width:60vw" class="answer-button" bindtap="send">发送</button>
+          <button style="background-color:grey;color:white;margin-top:70rpx;margin:10rpx;width:60vw" class="answer-button" bindtap="leave">取消</button>
+
+        </view>
+      </view>
+  </view>  
+</view>

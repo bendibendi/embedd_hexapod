@@ -1,0 +1,48 @@
+<view class="container">
+  <view class="label">连接地址（域名）：</view>
+  <input bindinput="setHost" value="{{ host }}" />
+  <view class="is-flex">
+    <button type="primary" bindtap="connect">{{ conenctBtnText }}</button>
+    <button type="warn" disabled="{{ conenctBtnText === '连接' }}" bindtap="disconnect">断开连接</button>
+  </view>
+  <view class="label">订阅主题：</view>
+  <input bindinput="setSubTopic" value="{{ subTopic }}" />
+  <view class="is-flex">
+    <button type="primary" bindtap="subscribe">订阅</button>
+    <button type="warn" bindtap="unsubscribe">取消订阅</button>
+  </view>
+  <view class="label">发布主题：</view>
+  <input bindinput="setPubTopic" value="{{ pubTopic }}" />
+  <view class="label">发布消息：</view>
+  <input bindinput="setPubMsg" value="{{ pubMsg }}"></input>
+  <view class="is-flex">
+    <button type="primary" bindtap="publish">发布</button>
+  </view>
+  <view class="label">收到的消息：</view>
+  <!-- <view class="received-msg-box">
+    <rich-text nodes="{{receivedMsg }}"></rich-text>
+  </view> -->
+  <image src='{{base64ImgUrl}}'> </image>
+  <view class="is-flex">
+    <button type="primary" bindtap="publishData" data-topic="wechatCommand" data-command="climb" data-value="true">爬台阶</button>
+    <button type="primary" bindtap="unsubscribe" data-topic="v" data-command="stop" data-value="true">停止</button>
+  </view>
+  <slider
+  bindchange="slideChange"
+  data-topic="wechatCommand"
+  value="{{sliderValue}}"
+  data-command="yaw"
+  min="0"
+  max="100"
+  show-value
+/>
+
+
+<view class="chose">
+    <view  class="{{num==1?'box1':''}}" bindtap="Click1">点击切换1</view>
+    <view  class="{{num==2?'box1':''}}" bindtap="Click2">点击切换2</view>
+</view>
+
+
+
+</view>

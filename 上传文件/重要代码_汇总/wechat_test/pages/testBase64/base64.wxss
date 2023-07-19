@@ -1,0 +1,69 @@
+.page{background: #f4f4f4; font-size: 14px;}
+.hd{
+  padding: 20px; height:20px; line-height: 20px; 
+  position: relative; text-align: center;
+  margin-bottom: 20px;
+}
+.c-link{color:#576b95; height: 20px; position:absolute; right:20px; top:20px;}
+.title{font-size: 17px; height: 30px; line-height: 30px; text-align: center}
+.canvas {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  background-color: #f4f4f4;
+}
+.ft{background:#fff; height:30px;margin-top: 30rpx;}
+.box{padding: 15px; display: flex; flex-direction: column}
+
+.component-slider {width: 90%;position: relative;margin: 0rpx auto 0rpx;padding: 70rpx 0 70rpx;}
+/* 盒子 */
+.slider-box { width: 88%;margin: 0 auto;position: absolute;left: 50%; top: 50%;transform: translate(-50%, -50%);}
+/* 未选中区线 */
+.slider-line{ width: 100%;height: 10rpx;background: rgba(98, 91, 0, 0.1);margin: 0 auto;position: absolute; left: 50%;top: 50%;transform: translate(-50%, -50%);}
+/* 选中区线 */
+.slider-line-active{position: absolute;left: 0;top: 50%;transform: translate(0, -50%); height: 10rpx;background:  #000000;}
+/* slider按钮 */
+.slider-btn {
+  width: 80rpx;
+  height: 45rpx;
+ font-size: 18px;
+ color: white;
+ text-align: center;
+ padding: -1px;
+  border-radius: 20rpx;
+}
+/* 显示的数字 */
+.slider-number { width: 100%;position: absolute;bottom: -10rpx;}
+.slider-number text{position: absolute; top: 0;font-size: 24rpx;color: #999999;transition: all 0.3s;}
+/* 当前选中的数字 */
+.slider-number text.active {font-size: 40rpx;color: #eacd76;transition: all 0.3s;
+}
+
+.slider-number1 { width: 100%;position: absolute;bottom: -10rpx;}
+.slider-number1 text{position: absolute; top: 0;font-size: 24rpx;color: #999999;transition: all 0.3s;}
+/* 当前选中的数字 */
+.slider-number1 text.active {font-size: 40rpx;color: #5B96F6;transition: all 0.3s;
+}
+/* slider组件设置透明 */
+slider{opacity:0;}
+
+.infotext{
+
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: pre-line;
+  font-weight: bold;
+  margin: 2.5rpx 0.5rpx 2.5rpx 0.5rpx;
+
+}
+
+.textbox{
+  display: flex;
+  align-items: center;
+}
+
+.buttonbox{
+  display: flex;
+  align-items: center;
+}

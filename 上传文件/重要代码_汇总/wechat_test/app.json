@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/work/work",
+    "pages/testBase64/base64",
+    "pages/index/index"
+  ],
+  "window": {
+    "disableScroll": true,
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "控制台",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
